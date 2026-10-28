@@ -10,9 +10,10 @@ from app.db.session import get_db
 from app.api.filters import build_call_filters
 from app.models.call_record import CallRecord
 from app.schemas.call_record import PaginatedCallsResponse
+from app.api.dependencies import get_current_user
 
 
-router = APIRouter(prefix="/api/calls", tags=["Calls"])
+router = APIRouter(prefix="/api/calls", tags=["Calls"], dependencies=[Depends(get_current_user)],)
 
 DbSession = Annotated[Session, Depends(get_db)]
 

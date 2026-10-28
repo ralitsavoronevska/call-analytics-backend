@@ -9,9 +9,10 @@ from app.db.session import get_db
 from app.api.filters import build_call_filters
 from app.models.call_record import CallRecord
 from app.schemas.analytics import CallSummaryResponse, TopCallerItem, TopCallersResponse
+from app.api.dependencies import get_current_user
 
 
-router = APIRouter(prefix="/api/analytics", tags=["Analytics"])
+router = APIRouter(prefix="/api/analytics", tags=["Analytics"], dependencies=[Depends(get_current_user)],)
 
 DbSession = Annotated[Session, Depends(get_db)]
 
